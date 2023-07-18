@@ -24,4 +24,4 @@ app.get('',(req,res)=>{
     res.send(results);
 
 })
-app.listen(3000,()=>console.log(`running at https://localhost:3000`))
+app.listen(3000,()=>console.log(`running at http://localhost:3000`))

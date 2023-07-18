@@ -1,13 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
-function App() {
+function useAnimalSearch(){
+
   const [animals,setAnimals] = useState([])
+  
+  useEffect(()=>{
+    const lastQuery= localStorage.getItem('lastQuery')
+    search(lastQuery)
+
+  },[])
+
   const search =async (query)=>{
     const response= await fetch(`http://localhost:3000/?q=${query}`)
     const data = await response.json();
     setAnimals(data);
+    localStorage.setItem('lastQuery',query)
   }
+  return {search, animals}
+
+}
+
+function App() {
+  const {search, animals} = useAnimalSearch()
 
   return (
     <div >
